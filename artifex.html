@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Artifex — Where craft meets intelligence</title>
+<div class="logo">A</div>
+<div class="logo">
+  <img src="artifex5.png" alt="Artifex Logo"/>
+</div>
+
+
+  <!-- Palette: coffee (#6b4f3b), pastel orange (#f4a261), cream/white -->
+  <style>
+    :root{
+      --coffee: #6b4f3b;
+      --orange: #f4a261;
+      --cream: #fff7ef;
+      --muted: #7c6a5a;
+      --card-bg: #ffffff;
+      --glass: rgba(255,255,255,0.85);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: var(--coffee);
+      background: linear-gradient(180deg, var(--cream) 0%, #fff 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding-bottom:140px; /* space for chatbot on small screens */
+    }
+
+    header{
+      padding:40px 20px;
+      text-align:center;
+      background: linear-gradient(90deg, rgba(244,162,97,0.08), rgba(107,79,59,0.03));
+      border-bottom:1px solid rgba(107,79,59,0.06);
+    }
+    .brand {
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo {
+      width:56px;height:56px;border-radius:12px;
+      background:linear-gradient(135deg,var(--coffee), #8b5e3c);
+      color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;
+      box-shadow: 0 6px 18px rgba(107,79,59,0.12);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    h1{margin:0;font-size:28px;letter-spacing:0.2px}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+
+    main{max-width:1100px;margin:30px auto;padding:0 20px}
+
+    /* Products */
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .card{
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:14px;
+      box-shadow:0 6px 18px rgba(16,24,40,0.06);
+      border: 1px solid rgba(107,79,59,0.04);
+    }
+    .card img{width:100%;height:170px;object-fit:cover;border-radius:8px}
+    .product-meta{display:flex;justify-content:space-between;margin-top:10px;align-items:center}
+    .price{font-weight:700;color:var(--coffee)}
+    .artisan{font-size:13px;color:var(--muted)}
+
+    /* CTA */
+    .cta{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      margin-top:18px;
+    }
+    .btn{
+      background:var(--orange);
+      color:var(--coffee);
+      border:none;padding:10px 16px;border-radius:10px;font-weight:600;
+      cursor:pointer;box-shadow:0 6px 18px rgba(244,162,97,0.12);
+    }
+    .btn.secondary{
+      background:transparent;border:1px solid rgba(107,79,59,0.08);color:var(--coffee)
+    }
+
+    /* Spotlight */
+    .spotlight{
+      display:flex;gap:14px;align-items:center;margin-top:22px;padding:14px;border-radius:12px;background:linear-gradient(90deg,var(--cream),#fff);
+      border:1px solid rgba(107,79,59,0.03)
+    }
+    .spotlight img{width:86px;height:86px;border-radius:10px;object-fit:cover}
+    .spot-info{flex:1}
+    .spot-info h4{margin:0 0 6px}
+    .spot-info p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Chatbot */
+    .chat-container{
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      width:320px;
+      max-width:92%;
+      border-radius:12px;
+      box-shadow:0 18px 40px rgba(16,24,40,0.18);
+      overflow:hidden;
+      background:var(--glass);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(16,24,40,0.06);
+    }
+    .chat-header{display:flex;align-items:center;gap:10px;padding:12px;background:linear-gradient(90deg,var(--coffee), #8b5e3c);color:white}
+    .chat-header .title{font-weight:700}
+    .chat-body{padding:12px;height:200px;overflow:auto;background:transparent}
+    .msg{margin:8px 0;display:flex}
+    .msg.user{justify-content:flex-end}
+    .bubble{
+      max-width:78%;padding:8px 10px;border-radius:12px;font-size:14px;line-height:1.25;
+    }
+    .bubble.user{background: #fff;color:var(--coffee);border-radius:12px}
+    .bubble.bot{background: #f4f1ed;color:var(--coffee);border-radius:12px}
+    .chat-footer{display:flex;padding:10px;gap:8px;background:transparent}
+    .chat-footer input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(16,24,40,0.06)}
+    .chat-footer button{padding:10px 12px;border-radius:10px;border:none;background:var(--coffee);color:white;cursor:pointer}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:600px){
+      .grid{grid-template-columns:1fr}
+      header{padding:28px 14px}
+      h1{font-size:22px}
+      .chat-container{width:92%;right:4%}
+    }
+
+    /* small helper */
+    .muted-small{color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="logo">A</div>
+      <div style="text-align:left">
+        <h1>Artifex</h1>
+        <p class="lead">Where craft meets intelligence — AI assistant for local artisans</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="section-title">
+        <h2>Featured Artisan Products</h2>
+        <div>
+          <button class="btn" onclick="scrollToProducts()">Explore</button>
+          <button class="btn secondary" onclick="openSignup()">Become an Artisan</button>
+        </div>
+      </div>
+
+      <div id="products" class="grid">
+        <!-- Product 1 -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=0e47b76d4bbdcb0cba9d54e9b3b7d1d8" alt="Pottery">
+          <h3>Handmade Pottery Bowl</h3>
+          <div class="product-meta">
+            <div>
+              <div class="price">₹750</div>
+              <div class="artisan muted-small">by Ananya • Jaipur</div>
+            </div>
+            <div>
+              <button class="btn secondary" onclick="openSpotlight('Ananya','Handmade Pottery Bowl','Ananya crafts natural clay bowls with glaze inspired by Rajasthani motifs. Price: ₹750')">View</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=ee7a2c0fb586ad0b4612cfb5bdc7e3b9" alt="Jewelry">
+          <h3>Beaded Necklace</h3>
+          <div class="product-meta">
+            <div>
+              <div class="price">₹500</div>
+              <div class="artisan muted-small">by Kavya • Varanasi</div>
+            </div>
+            <div>
+              <button class="btn secondary" onclick="openSpotlight('Kavya','Beaded Necklace','Kavya makes eco-friendly beaded necklaces using local seeds and threads. Price: ₹500')">View</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3b7c2560c6a6b3ef3b9a4b5a3b7a1b9f" alt="Painting">
+          <h3>Mini Canvas Painting</h3>
+          <div class="product-meta">
+            <div>
+              <div class="price">₹1200</div>
+              <div class="artisan muted-small">by Aarav • Pune</div>
+            </div>
+            <div>
+              <button class="btn secondary" onclick="openSpotlight('Aarav','Mini Canvas Painting','Aarav paints small, vibrant scenes on canvas. Perfect as gifts. Price: ₹1200')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spotlight area -->
+      <div id="spotlight" class="spotlight" style="display:none;margin-top:22px">
+        <img id="spot-img" src="https://via.placeholder.com/150" alt="artisan photo">
+        <div class="spot-info">
+          <h4 id="spot-title">Ananya</h4>
+          <p id="spot-desc">Short artisan description</p>
+        </div>
+        <div>
+          <button class="btn" onclick="closeSpotlight()">Close</button>
+        </div>
+      </div>
+
+    </section>
+
+    <section style="margin-top:36px">
+      <h2>About Artifex</h2>
+      <p style="max-width:720px;color:var(--muted)">
+        Artifex helps local artisans get discovered by customers using an AI assistant that guides artisans to list products and helps buyers find meaningful handmade items. This prototype shows product discovery, artisan spotlight and a demo AI chat assistant.
+      </p>
+    </section>
+  </main>
+
+  <!-- Chatbot -->
+  <div class="chat-container" id="chat">
+    <div class="chat-header">
+      <div style="width:40px;height:40px;border-radius:8px;background:white;color:var(--coffee);display:flex;align-items:center;justify-content:center;font-weight:700">AI</div>
+      <div>
+        <div class="title">Artifex AI</div>
+        <div style="font-size:12px;opacity:0.9">Ask about products or how to sell</div>
+      </div>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div style="font-size:13px;color:var(--muted);">Hi! I’m Artifex AI — ask me for product recommendations or how to list your craft.</div>
+    </div>
+    <div class="chat-footer">
+      <input id="chatInput" type="text" placeholder="Type your question..." onkeydown="if(event.key==='Enter'){sendChat()}">
+      <button onclick="sendChat()">Send</button>
+    </div>
+  </div>
+
+  <!-- Small note about editing -->
+  <div style="position:fixed;left:16px;bottom:16px;background:var(--coffee);color:white;padding:8px 12px;border-radius:10px;font-size:13px;box-shadow:0 8px 20px rgba(0,0,0,0.12)">
+    Edit: replace ZAPIER_WEBHOOK variable in script to connect Zapier
+  </div>
+
+  <script>
+    // ---------- Replace with your Zapier webhook if you have one ----------
+    // Example: const ZAPIER_WEBHOOK = "https://hooks.zapier.com/hooks/catch/123456/abcdef/";
+    const ZAPIER_WEBHOOK = ""; // <--- paste your Zapier webhook URL here (optional)
+
+    // Utility: add message bubble
+    function addMessage(text, who='bot'){
+      const body = document.getElementById('chatBody');
+      const wrap = document.createElement('div');
+      wrap.className = 'msg ' + (who==='user' ? 'user' : 'bot');
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble ' + (who==='user' ? 'user' : 'bot');
+      bubble.innerText = text;
+      wrap.appendChild(bubble);
+      body.appendChild(wrap);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    // Chat send logic: sends to Zapier if webhook provided, else uses dummy replies
+    async function sendChat(){
+      const inputEl = document.getElementById('chatInput');
+      const text = inputEl.value.trim();
+      if(!text) return;
+      addMessage(text, 'user');
+      inputEl.value = '';
+      // optimistic typing indicator
+      addMessage('Typing...', 'bot');
+
+      if(ZAPIER_WEBHOOK){
+        try{
+          const res = await fetch(ZAPIER_WEBHOOK, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({message: text})
+          });
+          // Zapier webhook may return JSON; try parse
+          const data = await res.json();
+          // expected: {reply: "..." } or similar - adapt if your Zapier returns differently
+          const reply = data.reply || data.response || JSON.stringify(data);
+          // remove 'Typing...' placeholder
+          removeLastBotTyping();
+          addMessage(reply, 'bot');
+        } catch(err){
+          removeLastBotTyping();
+          addMessage("Sorry, failed to reach AI. Try again or check webhook.", 'bot');
+          console.error('Zapier fetch error', err);
+        }
+      } else {
+        // Dummy heuristics for demo
+        removeLastBotTyping();
+        const l = text.toLowerCase();
+        if(l.includes('jewelry')||l.includes('necklace')||l.includes('gift')){
+          addMessage("Here are some handmade jewelry suggestions: Beaded Necklace (₹500). Want more details or similar items?", 'bot');
+        } else if(l.includes('sell')||l.includes('join')||l.includes('register')){
+          addMessage("To sell on Artifex: click 'Become an Artisan', fill basic details, upload 3 photos, set price. Need help with images?", 'bot');
+        } else if(l.includes('pottery')||l.includes('bowl')){
+          addMessage("We have a handmade pottery bowl by Ananya for ₹750. Would you like contact details or to add to cart?", 'bot');
+        } else {
+          addMessage("Great question! I can help find products or guide artisans to register. Try: 'Show me jewelry under ₹1000' or 'How do I become a seller?'", 'bot');
+        }
+      }
+    }
+
+    function removeLastBotTyping(){
+      const body = document.getElementById('chatBody');
+      // remove last message that equals "Typing..."
+      const msgs = body.querySelectorAll('.msg');
+      for(let i = msgs.length -1; i>=0; i--){
+        const bubble = msgs[i].querySelector('.bubble');
+        if(bubble && bubble.innerText === 'Typing...'){
+          msgs[i].remove();
+          break;
+        }
+      }
+    }
+
+    // Spotlight functions
+    function openSpotlight(name, title, desc){
+      document.getElementById('spotlight').style.display = 'flex';
+      document.getElementById('spot-title').innerText = name + " — " + title;
+      document.getElementById('spot-desc').innerText = desc;
+      // simple image mapping (placeholder)
+      document.getElementById('spot-img').src = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=b4a4d9a85c6e5f1c6a7b2b1c9a2d3e72';
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    function closeSpotlight(){
+      document.getElementById('spotlight').style.display = 'none';
+    }
+
+    // small helpers
+    function scrollToProducts(){ document.getElementById('products').scrollIntoView({behavior:'smooth'}); }
+    function openSignup(){ alert("Sign up flow placeholder — in final product this links to artisan registration."); }
+
+    // allow clicking anywhere outside to close (not necessary but nice)
+    document.addEventListener('click', (e)=>{
+      // do nothing now
+    });
+
+    // Accessibility: focus input on load
+    window.addEventListener('load', ()=> document.getElementById('chatInput').focus());
+  </script>
+</body>
+</html>
